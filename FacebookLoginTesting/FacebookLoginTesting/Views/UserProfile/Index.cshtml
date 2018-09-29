@@ -1,0 +1,225 @@
+﻿@using Microsoft.AspNet.Identity;
+@model IEnumerable<FacebookLoginTesting.Models.UserProfile>
+@*@model FacebookLoginTesting.Models.UserProfile*@
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!-- Plugin CSS -->
+    <link href="~/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/css/creative.min.css" rel="stylesheet">
+    <link href="~/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/css/creation.min.css" rel="stylesheet">
+
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+
+    <link href="~/css/fluidbox.min.css" rel="stylesheet">
+
+    <link href="~/user-profile/css/responsive.css" rel="stylesheet">
+
+    <link href="~/user-profile/css/styles.css" rel="stylesheet">
+    <script>
+
+        if ("Notification" in window) {
+            let ask = Notification.requestPermission();
+            ask.then(permission => {
+                if (permission === "granted") {
+                    let msg = new Notification("Emergency Blood Donor", {
+                        body: "Hello,"+"@User.Identity.GetUserName()"+<br/>+" Welcome from Emergency Blood Donor",
+                        icon: "~/img/Logo.png"
+                    });
+                    msg.addEventListner("click", event => {
+                        alert("Click recieved");
+                    })
+                }
+
+            });
+        }
+    </script>
+
+</head>
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger text-danger" href="#page-top"><img src="~/img/Logo.png" alt=""></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#DonorList">Donors List & Emergency Donor Searcher</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+
+            
+            </div>
+        </div>
+    </nav>
+
+    @if (@Model != null)
+    {
+        foreach (var item in Model)
+        {    <!-- Header -->
+            <header class="masthead text-center d-flex">
+                <section class="intro-section masthead text-center d-flex">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1 col-lg-2"></div>
+                            <div class="col-md-10 col-lg-8">
+                                <div class="intro">
+                                    @*<div class="profile-img"><img src="@Html.ValueFor(model => model.ImagePath)"></div>
+                                           <h2><b>@Html.DisplayFor(model => model.Name)</b></h2>
+
+                                               <h4 class="font-yellow">Blood Donor</h4>
+                                           <ul class="information margin-tb-30">
+
+                                               <li><b>Email : </b>@Html.DisplayFor(model => model.Email)</li>
+
+                                               <li><b>Blood Type : </b> @Html.DisplayFor(model => model.BloodType)</li>
+
+                                               <li><b>Age : </b>@Html.DisplayFor(model => model.Age) </li>
+
+                                               <li><b>Latest Blood Donation Date : </b>@Html.DisplayFor(model => model.DateOfDonation)</li>
+
+
+                                               <li class="text-center"><a href="@Url.Action("EditProfile", "UserProfile", new { @id = item.UserId })" class="openDialog-Edit"><i class="fas fa-2x fa-edit text-primary mb-3 sr-icon-3" style="cursor: pointer;"></i></a></li>
+
+
+                                        </ul>*@
+                                   <div class="profile-background" style="background-color:white;"><img src="@item.ImagePath" style=" width:50px; height:50px; border-radius: 25px; margin: 0 auto; overflow: hidden; position: center; top: -100px; margin-bottom: -70px;"></div>
+                                    @*<div class="profile-img"><img src="@item.ImagePath"></div>*@
+                                    <h2><b>@item.Name</b></h2>
+
+                                    <h4 class="font-yellow">Blood Donor</h4>
+                                    <ul class="information margin-tb-30" style="    font-family:Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;">
+
+                                        <li id="@item.UserId"><b>Email : </b>@item.Email</li>
+                                        <li><b>Age : </b> @item.Age</li>
+                                        <li><b>Blood Type : </b> @item.BloodType</li>
+                                        <li><b>Latest Date of Blood Donation : </b> @item.DateOfDonation</li>
+                                        <li class="text-center"><a href="@Url.Action("EditProfile", "UserProfile", new { @id = @item.UserId })" class="openDialog-Edit"><i class="fas fa-2x fa-edit text-primary mb-3 sr-icon-3" style="cursor: pointer;"></i></a></li>
+
+                                    </ul>
+
+                                </div><!-- intro -->
+                            </div><!-- col-sm-8 -->
+                        </div><!-- row -->
+                    </div><!-- container -->
+                </section><!-- intro-section -->
+            </header>
+        }
+    }
+
+
+    <!-- About Us -->
+    <section class="bg-danger" id="DonorList">
+        <div class="container">
+            <h2 class="section-heading text-white text-center">We've got what you need!</h2><br/><br/>
+            <div class="row">
+                <div class="col-lg-4 mx-auto text-center">
+                    <a href="@Url.Action("DonorList", "UserProfile", new { id = "" })" class="openDialog-Edit"><i class="fa fa-search fa-4x mb-3 sr-icon-3" style="color:cornsilk;"></i></a>
+                        <hr class="light my-4">
+                        <p class="text-white mb-4" style="font-size:18px;"> Search for donors in Donors List</p><br />
+                   </div>    
+                <div class="col-lg-4 mx-auto text-center">
+                    <a href="@Url.Action("CreatePost", "UserProfile", new { id = "" })" class="openDialog-Edit"><i class="fa fa-clipboard-list fa-4x mb-3 sr-icon-3" style="color:cornsilk;"></i></a>
+                    <hr class="light my-4">
+                    <p class="text-white mb-4" style="font-size:18px;">Post to Search For Emergency Blood Donors</p><br/>
+                   
+                    
+                </div>
+                <div class="col-lg-4 mx-auto text-center">
+                 <a href="@Url.Action("Posting", "UserProfile", new { id = "" })" class="openDialog-Edit"><i class="fa fa-th-list fa-4x mb-3 sr-icon-3" style="color:cornsilk;"></i></a>
+                    <hr class="light my-4">
+                    <p class="text-white mb-4" style="font-size:18px;">Look for Blood Needing Posts to Donate</p><br />
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="background-color:white; color:aqua;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-heading" style="color:black;">Contact Us!</h2>
+                    <hr class="my-4">
+                    <p class="mb-5">Have some questions about the application? Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ml-auto text-center">
+                    <i class="fas fa-phone fa-3x mb-3 sr-contact-1"></i>
+                    <p>09-420056760</p>
+                </div>
+                <div class="col-lg-4 mr-auto text-center">
+                    <i class="fas fa-envelope fa-3x mb-3 sr-contact-2"></i>
+                    <p>
+                        <a href="mailto:supyaethuya@gmail.com" class="js-scroll-trigger text-secondary" style="color:white;">EmergencyBloodDonor@gmail.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background-color:darkred;">
+        <p style="color:white;">Copyright &copy; Emergency Blood Donor @DateTime.Now.Year</p>
+    </footer>
+
+    <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="~/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="~/Scripts/creative.min.js"></script>
+    <script src="~/Scripts/creation.min.js"></script>
+
+
+    @*<script src="common-js/jquery-3.2.1.min.js"></script>
+
+        <script src="common-js/tether.min.js"></script>
+
+        <script src="common-js/bootstrap.js"></script>
+
+        <script src="common-js/isotope.pkgd.min.js"></script>
+
+        <script src="common-js/jquery.waypoints.min.js"></script>
+
+        <script src="common-js/progressbar.min.js"></script>
+
+        <script src="common-js/jquery.fluidbox.min.js"></script>
+
+        <script src="common-js/scripts.js"></script>*@
+
+</body>
+</html>

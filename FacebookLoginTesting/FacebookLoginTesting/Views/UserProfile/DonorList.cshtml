@@ -1,0 +1,135 @@
+﻿@model IEnumerable<FacebookLoginTesting.Models.UserProfile>
+
+@{
+    ViewBag.Title = "DonorList";
+}
+
+
+
+@{
+    ViewBag.Title = "DonorList";
+}
+
+<h2>Donors List</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            <div class="input-group">
+                @using (Html.BeginForm("DonorList", "UserProfile", FormMethod.Get))
+                {
+                    <b>Search By: </b>
+
+                    @Html.RadioButton("SaveBy", "BloodType", true)<label1>Blood Type</label1>
+                    @Html.RadioButton("SaveBy", "Location", true)<label2>Township</label2><br /><br />
+                    @Html.TextBox("search")<input type="submit" value="Search" />
+                       
+                }
+            </div>
+        </div>
+    </div>
+    <br /><br />
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table text-center">
+                <tr>
+                    <th style="font-family:'Hobo Std'; font-size:18px;">
+                        Profile Image
+                    </th>
+                    <th style="font-family:'Hobo Std'; font-size:18px;">
+                        Donor List Detail
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th style="font-family:'Hobo Std'; font-size:18px;">
+                            Blood Type
+                        </th>
+                        <th style="font-family:'Hobo Std'; font-size:18px;">
+                            Age
+                        </th>
+                        <th style="font-family:'Hobo Std'; font-size:18px;">
+                            Phone Number
+                        </th>
+                        <th style="font-family:'Hobo Std'; font-size:18px;">
+                          Date Of Latest Blood Donation
+                        </th>
+                        <th style="font-family:'Hobo Std'; font-size:18px;">
+                            Location
+                        </th>
+
+                        <th></th>*@
+                </tr>
+                @if (@Model == null)
+                {
+                    <tr>
+                        <td colspan="4">No rows match search criteria</td>
+                    </tr>
+                }
+                else
+                {
+                   foreach (var item in Model)
+                   {
+                        <tr>
+                            <td>
+                                <img src="@item.ImagePath" style=" width:50px; height:50px; border-radius: 25px; margin: 0 auto; overflow: hidden; position: center; top: -100px; margin-bottom: -70px;">
+                            </td>
+                            <td style="font-family:'Times New Roman'; text-align:left;">
+                                <p>
+                                    <strong style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:16px;">Name: </strong>
+                                    <b style="font-size:14px;">@Html.DisplayFor(modelItem => item.Name)</b>
+                                </p>
+                                <p>
+                                    <strong style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:16px;">Blood Type: </strong>
+                                    <b style="font-size:14px;">@Html.DisplayFor(modelItem => item.BloodType)</b>
+                                </p>
+                                <p>
+                                    <strong style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:16px;">Age: </strong>
+                                    <b style="font-size:14px;">@Html.DisplayFor(modelItem => item.Age)</b>
+                                </p>
+                                <p>
+                                    <strong style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:16px;">Phone number: </strong>
+                                    <b style="font-size:14px;">@Html.DisplayFor(modelItem => item.PhoneNumber)</b>
+                                </p>
+                                <p>
+                                    <strong style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:16px;">Date Of Latest Blood Donation: </strong>
+                                    <b style="font-size:14px;">@Html.DisplayFor(modelItem => item.DateOfDonation)</b>
+                                </p>
+                                <p>
+                                    <strong style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:16px;">Location: </strong>
+                                    <b style="font-size:14px;">@Html.DisplayFor(modelItem => item.Location)</b>
+                                </p>
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td style="font-family:'Times New Roman'; font-size:14px;">
+                                    @Html.DisplayFor(modelItem => item.BloodType)
+                                </td>
+                                <td style="font-family:'Times New Roman'; font-size:14px;">
+                                    @Html.DisplayFor(modelItem => item.Age)
+                                </td>
+                                <td style="font-family:'Times New Roman'; font-size:14px;">
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>
+                                <td style="font-family:'Times New Roman'; font-size:14px;">
+                                    @Html.DisplayFor(modelItem => item.DateOfDonation)
+                                </td>
+                                <td style="font-family:'Times New Roman'; font-size:14px;">
+                                    @Html.DisplayFor(modelItem => item.Location)
+                                </td>*@
+
+
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+<div class="btn btn-light btn-sm">
+    @Html.ActionLink("Back To Home", "Index", new { id = "", @class = "btn btn-light js-scroll-trigger" })
+</div>
+
+<br /><br /><br /><br />
